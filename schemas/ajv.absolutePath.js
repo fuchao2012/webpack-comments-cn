@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * 捕获是否是绝对路径的错误
+ * @param shouldBeAbsolute boolean 是否是绝对路径
+ * @param data 数据
+ * @param schema 格式
+ * @returns {{keyword: string, params: {absolutePath: *}, message: string, parentSchema: *}}
+ */
 const getErrorFor = (shouldBeAbsolute, data, schema) => {
 	const message = shouldBeAbsolute ?
 		`The provided value ${JSON.stringify(data)} is not an absolute path!`
@@ -12,6 +19,11 @@ const getErrorFor = (shouldBeAbsolute, data, schema) => {
 		parentSchema: schema,
 	};
 };
+
+/**
+ * json-schema-validator
+ * @param ajv
+ */
 module.exports = (ajv) => ajv.addKeyword("absolutePath", {
 	errors: true,
 	type: "string",
